@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #f7f8fc;
+  --foreground: #0b1226;
+  --muted: #5b6480;
+  --card: #ffffff;
+  --border: #e3e6f0;
+  --brand: #4f46e5;
+  --brand-2: #06b6d4;
+  --accent: #f59e0b;
+}
+
+.dark {
+  --background: #060a18;
+  --foreground: #eef1fb;
+  --muted: #9aa3c2;
+  --card: #0e1530;
+  --border: #1f2a4d;
+  --brand: #818cf8;
+  --brand-2: #22d3ee;
+  --accent: #fbbf24;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-brand: var(--brand);
+  --color-brand-2: var(--brand-2);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), ui-serif, Georgia, serif;
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-blob: blob 14s ease-in-out infinite;
+
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-18px) rotate(2deg); }
+  }
+  @keyframes blob {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(40px, -30px) scale(1.15); }
+    66% { transform: translate(-30px, 30px) scale(0.9); }
+  }
+}
+
+html { scroll-behavior: auto; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.text-gradient {
+  background: linear-gradient(110deg, var(--brand), var(--brand-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glass {
+  background: color-mix(in srgb, var(--card) 70%, transparent);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
